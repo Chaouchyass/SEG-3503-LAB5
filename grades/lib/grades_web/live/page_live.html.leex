@@ -1,0 +1,39 @@
+<h1>Grades</h1>
+
+<form phx-submit="calculate">
+  <table>
+    <tr>
+      <td>
+        <%= for n <- 1..@num_homeworks do %>
+          <label for="h<%= n %>">Homework #<%= n %></label>
+          <input type="text" id="h<%= n %>" name="h<%= n %>" value="<%= Enum.at(@grades[:homework], n-1, nil) %>" />
+        <% end %>
+        <label for="midterm">Midterm</label>
+        <input type="text" id="midterm" name="midterm" value="<%=  @grades[:midterm] %>" />
+        <label for="final">Final</label>
+        <input type="text" id="final" name="final" value="<%=  @grades[:final] %>" />
+      </td>
+      <td>
+        <%= for n <- 1..@num_labs do %>
+          <label for="l<%= n %>">Labs #<%= n %></label>
+          <input type="text" id="l<%= n %>" name="l<%= n %>" value="<%= Enum.at(@grades[:labs], n-1, nil) %>" />
+        <% end %>
+      </td>
+      <td>
+        <h2>Final Grade</h2>
+        <label>Letter Grade</label>
+        <div><%= @letter_grade %></div>
+
+        <label>Numeric Grade</label>
+        <div><%= @numeric_grade %></div>
+
+        <label>Percent</label>
+        <div><%= @percentage_grade %></div>
+
+        <button type="submit" phx-disable-with="Calculating...">Calculate</button>
+      </td>
+    </tr>
+  </table>
+
+</form>
+
